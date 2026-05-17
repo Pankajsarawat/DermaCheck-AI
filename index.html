@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DermaCheck AI</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- ONNX Runtime -->
+  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+</head>
+
+<body>
+
+<div class="app-shell">
+
+  <!-- LEFT PANEL -->
+  <aside class="left-panel">
+
+    <div class="brand">
+      <h1>DermaCheck AI</h1>
+      <p>Skin Lesion Analysis Prototype</p>
+    </div>
+
+    <div class="warning-box">
+      <h3>Important</h3>
+      <p>
+        This AI system is only for educational and research purposes.
+        It is NOT a medical diagnosis tool.
+      </p>
+    </div>
+
+    <div class="model-status">
+      <h3>Model Status</h3>
+      <p id="modelStatus">Loading...</p>
+    </div>
+
+  </aside>
+
+  <!-- CENTER PANEL -->
+  <main class="main-panel">
+
+    <div class="upload-section">
+
+      <div class="image-stage" id="dropZone">
+
+        <img id="previewImage" hidden>
+
+        <video id="cameraVideo" autoplay playsinline hidden></video>
+
+        <div class="empty-state" id="emptyState">
+          <h2>Upload Skin Image</h2>
+          <p>Drag & drop or use camera</p>
+        </div>
+
+      </div>
+
+      <canvas id="captureCanvas" hidden></canvas>
+
+      <!-- BUTTONS -->
+      <div class="controls">
+
+        <label class="upload-btn">
+          Upload Image
+          <input type="file" id="fileInput" accept="image/*">
+        </label>
+
+        <button id="cameraButton">
+          Start Camera
+        </button>
+
+        <button id="snapButton" disabled>
+          Capture
+        </button>
+
+        <button id="analyzeButton" disabled>
+          Analyze
+        </button>
+
+        <button id="resetButton">
+          Reset
+        </button>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- RIGHT PANEL -->
+  <aside class="results-panel">
+
+    <div class="result-box">
+
+      <h2 id="topLabel">
+        No image analyzed
+      </h2>
+
+      <p id="topDescription">
+        AI prediction results will appear here.
+      </p>
+
+      <!-- CONFIDENCE -->
+      <div class="confidence-section">
+
+        <div class="confidence-header">
+          <span>Confidence</span>
+          <span id="confidenceValue">0%</span>
+        </div>
+
+        <div class="risk-track">
+          <span id="riskFill"></span>
+        </div>
+
+      </div>
+
+      <!-- PREDICTIONS -->
+      <div id="rankedList" class="ranked-list"></div>
+
+    </div>
+
+  </aside>
+
+</div>
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
